@@ -63,6 +63,7 @@ import eekysam.festivities.entity.CandyMapping;
 import eekysam.festivities.entity.EntityCandyCreeper;
 import eekysam.festivities.events.ConnectionHandler;
 import eekysam.festivities.events.EventHooks;
+import eekysam.festivities.item.ItemChristmasRecord;
 import eekysam.festivities.item.ItemFestive;
 import eekysam.festivities.item.ItemFestiveBlock;
 import eekysam.festivities.item.ItemFoodFestive;
@@ -143,7 +144,7 @@ public class Festivities
 	public static Item peppermintStick;
 	public static Item garland;
 	public static Item ginger;
-	// public static Item WeWishYouAMerryChristmas;
+	public static Item WeWishYouAMerryChristmas;
 
 	public static Block candyLog;
 	public static Block snowglobe;
@@ -295,16 +296,14 @@ public class Festivities
 		ginger = new ItemFestive(nextItemID("ginger")).setTip("Don't eat it raw!").setUnlocalizedName("ginger").setTextureName(Festivities.ID + ":ginger").setCreativeTab(Festivities.matTab);
 		this.registerItem(ginger, "ginger");
                 
-                greenPresent = new BlockPresent(nextBlockID("greenPresent")).setUnlocalizedName("greenPresent").setTextureName(Festivities.ID + ":green_present").setCreativeTab(Festivities.decorTab);
+                greenPresent = new BlockPresent(nextBlockID("greenPresent")).setUnlocalizedName("greenPresent").setTextureName(Festivities.ID + ":green_present").setCreativeTab(Festivities.blockTab);
                 this.registerBlock(greenPresent, "greenPresent");
                 
-                redPresent = new BlockPresent(nextBlockID("redPresent")).setUnlocalizedName("redPresent").setTextureName(Festivities.ID + ":red_present").setCreativeTab(Festivities.decorTab);
+                redPresent = new BlockPresent(nextBlockID("redPresent")).setUnlocalizedName("redPresent").setTextureName(Festivities.ID + ":red_present").setCreativeTab(Festivities.blockTab);
                 this.registerBlock(redPresent, "redPresent");
 		
-		// WeWishYouAMerryChristmas = new ChristmasRecord(nextItemID(),
-		// "WeWishYouAMerryChristmas").setUnlocalizedName("record");
-		// GameRegistry.registerItem(WeWishYouAMerryChristmas,
-		// "WeWishYouAMerryChristmas");
+		WeWishYouAMerryChristmas = new ItemChristmasRecord(nextItemID("WeWishYouAMerryChristmas"), Festivities.ID + ":WeWishYouAMerryChristmas").setUnlocalizedName("WeWishYouAMerryChristmas").setTextureName(Festivities.ID + ":WeWishYouAMerryChristmas");
+                GameRegistry.registerItem(WeWishYouAMerryChristmas, "WeWishYouAMerryChristmas");
 
 		this.foodTab.setIcon(candyCane);
 		this.decorTab.setIcon(coloredOrnament);
@@ -312,6 +311,7 @@ public class Festivities
 		this.matTab.setIcon(holly);
 		this.miscTab.setIcon(magicCandy);
 
+                this.proxy.registerSound();
 		MinecraftForge.EVENT_BUS.register(new EventHooks());
 
 		this.config.save();
@@ -441,6 +441,8 @@ public class Festivities
                 
                 LanguageRegistry.addName(redPresent, "Red Gift Box");
                 LanguageRegistry.addName(greenPresent, "Green Gift Box");
+                
+                LanguageRegistry.addName(WeWishYouAMerryChristmas, "Music Disc");
 
 		GameRegistry.addShapelessRecipe(new ItemStack(this.figgy, 1), new Object[] { this.holly, this.berries, this.berries, Item.sugar });
 		GameRegistry.addRecipe(new ItemStack(this.moreCookies, 8, 0), new Object[] { "#X#", 'X', Item.sugar, '#', Item.wheat });

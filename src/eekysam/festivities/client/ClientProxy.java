@@ -11,12 +11,14 @@ import eekysam.festivities.client.render.tileEntity.TileEntitySimpleRenderer;
 import eekysam.festivities.client.render.tileEntity.TileEntitySnowMachineRenderer;
 import eekysam.festivities.client.render.tileEntity.TileEntitySnowglobeRenderer;
 import eekysam.festivities.entity.EntityCandyCreeper;
+import eekysam.festivities.events.SoundHandler;
 import eekysam.festivities.tile.TileEntityFireplace;
 import eekysam.festivities.tile.TileEntityGarland;
 import eekysam.festivities.tile.TileEntityOrnament;
 import eekysam.festivities.tile.TileEntityPlate;
 import eekysam.festivities.tile.TileEntitySnowMachine;
 import eekysam.festivities.tile.TileEntitySnowglobe;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
@@ -35,4 +37,9 @@ public class ClientProxy extends CommonProxy
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityCandyCreeper.class, new RenderCandyCreeper());
 	}
+        
+        public void registerSound()
+        {
+            MinecraftForge.EVENT_BUS.register(new SoundHandler());
+        }
 }
